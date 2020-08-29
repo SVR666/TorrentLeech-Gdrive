@@ -24,7 +24,8 @@ from tobrot import (
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
     EDIT_SLEEP_TIME_OUT,
-    CUSTOM_FILE_NAME
+    CUSTOM_FILE_NAME,
+    BLACKLISTED_WORDS
 )
 from pyrogram import (
 	InlineKeyboardButton,
@@ -202,8 +203,14 @@ async def call_apropriate_function(
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
-            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
-            to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
+            new_file_name = to_upload_file
+            if BLACKLISTED_WORDS:
+                for element in BLACKLISTED_WORDS:   
+                    if element in new_file_name :
+                        new_file_name = new_file_name.replace(element,'')
+                new_file_name = new_file_name.strip()
+            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{new_file_name}")
+            to_upload_file = f"{CUSTOM_FILE_NAME}{new_file_name}"
         else:
             to_upload_file = to_upload_file
 
@@ -326,8 +333,14 @@ async def call_apropriate_function_g(
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
-            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
-            to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
+            new_file_name = to_upload_file
+            if BLACKLISTED_WORDS:
+                for element in BLACKLISTED_WORDS:   
+                    if element in new_file_name :
+                        new_file_name = new_file_name.replace(element,'')
+                new_file_name = new_file_name.strip()
+            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{new_file_name}")
+            to_upload_file = f"{CUSTOM_FILE_NAME}{new_file_name}"
         else:
             to_upload_file = to_upload_file
 

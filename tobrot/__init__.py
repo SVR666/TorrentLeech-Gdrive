@@ -54,6 +54,7 @@ UPLOAD_AS_DOC = Config.UPLOAD_AS_DOC
 BOT_START_TIME = time.time()
 PYTDL_COMMAND_G = Config.PYTDL_COMMAND_G
 LOG_COMMAND = Config.LOG_COMMAND
+BLACKLISTED_WORDS = Config.BLACKLISTED_WORDS
 
 if os.path.exists("TorrentLeech-Gdrive.log"):
 	with open("Torrentleech-Gdrive.log", "r+") as f_d:

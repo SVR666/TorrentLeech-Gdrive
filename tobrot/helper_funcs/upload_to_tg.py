@@ -36,7 +36,9 @@ from tobrot import (
     DESTINATION_FOLDER,
     RCLONE_CONFIG,
     INDEX_LINK,
-    UPLOAD_AS_DOC
+    UPLOAD_AS_DOC,
+    CUSTOM_FILE_NAME,
+    BLACKLISTED_WORDS
 )
 
 from pyrogram import (
@@ -85,6 +87,17 @@ async def upload_to_tg(
             )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
+
+            if CUSTOM_FILE_NAME:
+                new_file_name = single_file
+                if BLACKLISTED_WORDS:
+                    for element in BLACKLISTED_WORDS:   
+                        if element in new_file_name :
+                            new_file_name = new_file_name.replace(element,'')
+                    new_file_name = new_file_name.strip()
+                os.rename(os.path.join(local_file_name, single_file), os.path.join(local_file_name, f"{CUSTOM_FILE_NAME}{new_file_name}"))
+                single_file = f"{CUSTOM_FILE_NAME}{new_file_name}"
+
             await upload_to_tg(
                 new_m_esg,
                 os.path.join(local_file_name, single_file),
