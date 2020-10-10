@@ -6,6 +6,7 @@
 A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
 # Benefits :-
+    ✓ Google Drive link cloning using gclone.(wip)
     ✓ Telegram File mirrorring to cloud along with its unzipping, unrar and untar
     ✓ Drive/Teamdrive support/All other cloud services rclone.org supports
     ✓ Unzip
@@ -22,7 +23,10 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     ✓
     
 # TO-DO
--   [x] Gdrive file clonning using Gclone
+-   ~Gdrive file clonning using Gclone~ `DONE ✓`
+-   [ ] Adding mp3 files support while playlist downloading.
+-   [ ] Password support while Unarchiving the files.
+-   [ ] Selection of required files during leeching the big files using aria(/leech command)
 
 ### Credit goes to SpEcHiDe for his Publicleech repo.
 
@@ -44,9 +48,51 @@ e)It should look like `app.json`. 🎉
 
 f)Then tap 👇👇
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) #Revived
+ Heroku is not supported now 😕 #Dead
 
 Better buy a vps 😐 and follow [this](https://github.com/gautamajay52/TorrentLeech-Gdrive#process-to-run-this-bot-on-vps)
+
+## Process to run this BOT on VPS
+
+- Clone this repo:
+```
+git clone https://github.com/gautamajay52/TorrentLeech-Gdrive torrentleech-gdrive
+cd torrentleech-gdrive
+```
+
+- Install requirements
+For Debian based distros
+```
+sudo apt install python3
+
+sudo snap install docker
+```
+Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
+
+## Setting up config file
+```
+cp tobrot/g_config.py tobrot/config.py
+```
+After this step you will see a new file named ```config.py``` in tobrot directory.
+
+Follow and fill all the required variables that were already filled in the sample config file, but with your details. And you can also fill all other variables according to your need and all those are explained below.
+
+If you need more explanation about any variable then read [app.jso](https://github.com/gautamajay52/TorrentLeech-Gdrive/blob/master/app.jso)
+
+## Deploying
+
+- Start docker daemon (skip if already running):
+```
+sudo dockerd
+```
+- Build Docker image:
+```
+sudo docker build . -t torrentleech-gdrive
+```
+- Run the image:
+```
+sudo docker run torrentleech-gdrive
+```
 
 ### The Legacy Way
 Simply clone the repository and run the main file:
@@ -172,10 +218,18 @@ and everythin except `[NAME]`
 
 * `PYTDL_COMMAND_G`
 
+* `CLONE_COMMAND_G`
+
 * `UPLOAD_AS_DOC`: Takes two option True or False. If True file will be uploaded as document. This is for people who wants video files as document instead of streamable.
 
 * `INDEX_LINK`: (Without `/` at last of the link, otherwise u will get error) During creating index, plz fill `Default Root ID` with the id of your `DESTINATION_FOLDER` after creating. Otherwise index will not work properly.
 ## Available Commands
+
+* `/gclone`: This command is used to clone gdrive files or folder using gclone.
+       
+       Syntax:- `[ID of the file or folder][one space][name of your folder only(If the id is of file, don't put anything)]` and then reply /gclone to it.
+       
+* `/log`: This will send you a txt file of the logs.
 
 * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
 
@@ -218,10 +272,10 @@ and everythin except `[NAME]`
 * `/renewme`: This will clear the remains of downloads which are not getting deleted after upload of the file or after /cancel command. 
 
 
-* [Only work with direct link for now]It is like u can add custom name as prefix of the original file name.
+* [Only work with direct link and youtube link for now]It is like u can add custom name as prefix of the original file name.
 Like if your file name is `gk.txt` uploaded will be what u add in `CUSTOM_FILE_NAME` + `gk.txt`
 
-Only works with direct link.No magnet or torrent.
+Only works with direct link/youtube link.No magnet or torrent.
 
 And also added custom name like...
 
@@ -229,44 +283,6 @@ You have to pass link as
 `www.download.me/gk.txt | new.txt`
 
 the file will be uploaded as `new.txt`.
-
-## Process to run this BOT on VPS
-
-- Clone this repo:
-```
-git clone https://github.com/gautamajay52/TorrentLeech-Gdrive torrentleech-gdrive
-cd torrentleech-gdrive
-```
-
-- Install requirements
-For Debian based distros
-```
-sudo apt install python3
-
-sudo snap install docker
-```
-Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
-
-## Setting up config file
-```
-cp tobrot/g_config.py tobrot/config.py
-```
-Follow and fill all the required variables that were already filled in the sample config file, but with your details. And you can also fill all other variables according to your need and all those are explained above already.
-
-## Deploying
-
-- Start docker daemon (skip if already running):
-```
-sudo dockerd
-```
-- Build Docker image:
-```
-sudo docker build . -t torrentleech-gdrive
-```
-- Run the image:
-```
-sudo docker run torrentleech-gdrive
-```
 
 
 ## How to Use?

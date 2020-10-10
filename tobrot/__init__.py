@@ -55,9 +55,10 @@ BOT_START_TIME = time.time()
 PYTDL_COMMAND_G = Config.PYTDL_COMMAND_G
 LOG_COMMAND = Config.LOG_COMMAND
 BLACKLISTED_WORDS = Config.BLACKLISTED_WORDS
+CLONE_COMMAND_G = Config.CLONE_COMMAND_G
 
-if os.path.exists("TorrentLeech-Gdrive.log"):
-	with open("Torrentleech-Gdrive.log", "r+") as f_d:
+if os.path.exists("TorrentLeech-Gdrive.txt"):
+	with open("Torrentleech-Gdrive.txt", "r+") as f_d:
 		f_d.truncate(0)
 
 # the logging things
@@ -67,7 +68,7 @@ logging.basicConfig(
     datefmt="%d-%b-%y %H:%M:%S",
     handlers=[
         RotatingFileHandler(
-            "Torrentleech-Gdrive.log",
+            "Torrentleech-Gdrive.txt",
             maxBytes=FREE_USER_MAX_FILE_SIZE,
             backupCount=10
         ),

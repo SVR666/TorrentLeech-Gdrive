@@ -53,3 +53,6 @@ class Config(object):
 
     #BlackListed Words
     BLACKLISTED_WORDS = os.environ.get('BLACKLISTED_WORDS','').split("|")
+
+    CLONE_COMMAND_G = os.environ.get("CLONE_COMMAND_G", "gclone")
+
